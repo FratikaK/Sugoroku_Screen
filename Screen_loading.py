@@ -42,7 +42,7 @@ class ScreenLoading(Screen_abc):
 
         if not self.flag:
             self.count += 1
-            if self.count > 80:
+            if self.count > 60:
                 self.flag = True
             super().update(10)
             return

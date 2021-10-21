@@ -102,25 +102,28 @@ class ScreenEncount(Screen_abc):
                     self.variable_init()
 
                     # 表示するテキストが工程0の時の最終段まで到達したときに
-                    if self.Program_text_number == 4:
+                    if self.Program_text_number == 5:
                         # 表示するオブジェクトを1に割り振っているものに変更
                         self.CurrentProgram = 1
 
                     if self.Program_text_number == 5:
-                        SC.effect_group.add(SC.ScreenChangeEffect(4))
+                        SC.effect_group.add(SC.ScreenChangeEffect(5, SC.ScreenChangeEffect.MOSAIC))
+                        # クラス変数の初期化
+                        self.CurrentProgram = 0
+                        self.Program_text_number = 0
 
                     # 表示するテキストが工程0の時の最終段以前の時は
-                    if self.Program_text_number < 4:
+                    if self.Program_text_number < 5:
                         # 表示するテキストを更新
                         self.Program_text_number = self.Program_text_number + 1
 
                 if event.key == K_q:
-                    # 親クラスに作った変数を削除
-                    del Screen_abc.Player1CharaID
-
-                    del Screen_abc.Player2CharaID
-
-                    del Screen_abc.BattleBackGroundID
+                    # # 親クラスに作った変数を削除
+                    # del Screen_abc.Player1CharaID
+                    #
+                    # del Screen_abc.Player2CharaID
+                    #
+                    # del Screen_abc.BattleBackGroundID
 
                     # 変数を初期化しようとおもったが特に使用することはなかった
                     self.variable_init()
@@ -130,16 +133,16 @@ class ScreenEncount(Screen_abc):
 
                     self.Program_text_number = 0
 
-                    Screen_abc.ScreenNum = 2
+                    SC.effect_group.add(SC.ScreenChangeEffect(3, SC.ScreenChangeEffect.MOSAIC))
 
     # 使用するイメージをロードする処理をまとめたもの、ついでに配置もここで行う
     def img_load(self):
 
-        backgroundimg = pygame.image.load('img/suzuki_img/戦闘背景_sample' + str(Screen_abc.BattleBackGroundID) + '.png')
+        backgroundimg = pygame.image.load('img/suzuki_img/戦闘背景_sample' + str(1) + '.png')
 
-        player1img = pygame.image.load('img/suzuki_img/chara' + str(Screen_abc.Player1CharaID) + '_migi.png')
+        player1img = pygame.image.load('img/suzuki_img/chara' + str(1) + '_migi.png')
 
-        player2img = pygame.image.load('img/suzuki_img/chara' + str(Screen_abc.Player2CharaID) + '_hidari.png')
+        player2img = pygame.image.load('img/suzuki_img/chara' + str(2) + '_hidari.png')
 
         dice_testimg = pygame.image.load('img/suzuki_img/dicesample.jpg')
 
