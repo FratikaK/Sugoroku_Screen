@@ -174,4 +174,4 @@ class ScreenMain(Screen_abc):
                     pygame.quit()
                     sys.exit()
                 if event.key == K_SPACE:
-                    SC.effect_group.add(SC.ScreenChangeEffect(3))
+                    SC.effect_group.add(SC.ScreenChangeEffect(4))
