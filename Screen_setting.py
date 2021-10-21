@@ -22,6 +22,9 @@ else:
     config = {PLAYER: 2, CPU: 1, TURN: 10}
     select_position = {0: 100, 1: 130, 2: 160, 3: 190}
 
+background_image = pygame.image.load("img/background/forest2.png")
+config_window = pygame.image.load("img/window/config_window.png")
+
 now_select = 0
 limit = len(select_position) - 1
 config_iterator = {}
@@ -46,12 +49,13 @@ class ScreenSetting(Screen_abc):
 
     # Override
     def display(self):
-        SC.screen.fill((0, 120, 0))
+        self.set_background(background_image)
+        SC.screen.blit(config_window, (320, 64))
         text_width = 400
         num_width = 800
         height = 100
         # タイトル表示
-        super().setText_L("Game Setting", (500, 30), TITLE_SIZE)
+        super().setText_L("Game Setting", (520, 20), TITLE_SIZE)
         # 各設定の項目表示
         for conf in config.keys():
             super().setText_M(conf, (text_width, height), TEXT_SIZE)
@@ -65,7 +69,7 @@ class ScreenSetting(Screen_abc):
         # 操作の仕方表示
         super().setText_M(
             "←　→で数値変更、設定が大丈夫ならスペースキーで次へを押してね", (30, 600), TEXT_SIZE)
-        super().update(60)
+        super().update(30)
 
     # Override
     def getEvent(self):
@@ -97,6 +101,7 @@ class ScreenSetting(Screen_abc):
                         else:
                             Config(c.get(PLAYER), c.get(CPU), c.get(TURN))
                         SC.effect_group.add(SC.ScreenChangeEffect(2))
+                        now_select = 0
                         return
 
                 if now_select < limit:
