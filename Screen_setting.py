@@ -8,6 +8,16 @@ import sys
 TEXT_SIZE = 25
 TITLE_SIZE = 50
 
+# =========================================================
+#
+#
+#                   Test comment
+#                   Test comment
+#                   Test comment2
+#                   Test comment3
+#
+# =========================================================
+
 # 一人で遊ぶはTrue、みんなで遊ぶはFalseにする
 SOLO = False
 
