@@ -126,6 +126,9 @@ class Screen_abc(metaclass=abc.ABCMeta):
             charPosi = (charPosi[0], charPosi[1] + size)
             count += 1
 
+    def add_effect(self, effect_instance: pygame.sprite.Sprite):
+        effect_group.add(effect_instance)
+
 
 # -----------------------------------------------------------------------------------
 # 以下エフェクトクラス
