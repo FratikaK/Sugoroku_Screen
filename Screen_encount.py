@@ -3,6 +3,7 @@ import pygame
 
 from pygame.locals import *
 
+import effect
 from Screen_abc import *
 import Screen_abc as SC
 
@@ -107,7 +108,7 @@ class ScreenEncount(Screen_abc):
                         self.CurrentProgram = 1
 
                     if self.Program_text_number == 5:
-                        SC.effect_group.add(SC.ScreenChangeEffect(5, SC.ScreenChangeEffect.MOSAIC))
+                        effect.add_effect(effect.ScreenChangeEffect(5, effect.ScreenChangeEffect.MOSAIC))
                         # クラス変数の初期化
                         self.CurrentProgram = 0
                         self.Program_text_number = 0
@@ -133,7 +134,7 @@ class ScreenEncount(Screen_abc):
 
                     self.Program_text_number = 0
 
-                    SC.effect_group.add(SC.ScreenChangeEffect(3, SC.ScreenChangeEffect.MOSAIC))
+                    effect.add_effect(effect.ScreenChangeEffect(3, effect.ScreenChangeEffect.MOSAIC))
 
     # 使用するイメージをロードする処理をまとめたもの、ついでに配置もここで行う
     def img_load(self):

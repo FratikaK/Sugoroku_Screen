@@ -2,10 +2,13 @@ import pygame
 from pygame.locals import *
 
 import Screen_abc as SC
+import effect
 from Screen_abc import Screen_abc
 import sys
 
 # 背景画像
+from Sugoroku_Screen.Map import Map
+
 background_img = pygame.image.load("img/oomoto_img/background_img.png")
 
 # window画像
@@ -24,31 +27,37 @@ item_window = pygame.image.load("img/oomoto_img/window/item_window.png")
 dice1 = pygame.image.load("img/oomoto_img/window/dice1.jpg")
 
 # フィールド画像
-castle_img = pygame.image.load('img/oomoto_img/object/castle.png')
-tower_img = pygame.image.load('img/oomoto_img/object/tower.png')
-budda_img = pygame.image.load('img/oomoto_img/object/budda.png')
-hotspring_img = pygame.image.load('img/oomoto_img/object/hotspring.png')
-shrine_img = pygame.image.load('img/oomoto_img/object/shrine.png')
-shop_img = pygame.image.load('img/oomoto_img/object/shop.png')
-ship_img = pygame.image.load('img/oomoto_img/object/ship.png')
-ship_small_img = pygame.image.load('img/oomoto_img/object/ship_small.png')
-pinetree_img = pygame.image.load('img/oomoto_img/object/pinetree.png')
+# castle_img = pygame.image.load('img/oomoto_img/object/castle.png')
+# tower_img = pygame.image.load('img/oomoto_img/object/tower.png')
+# budda_img = pygame.image.load('img/oomoto_img/object/budda.png')
+# hotspring_img = pygame.image.load('img/oomoto_img/object/hotspring.png')
+# shrine_img = pygame.image.load('img/oomoto_img/object/shrine.png')
+# shop_img = pygame.image.load('img/oomoto_img/object/shop.png')
+# ship_img = pygame.image.load('img/oomoto_img/object/ship.png')
+# ship_small_img = pygame.image.load('img/oomoto_img/object/ship_small.png')
+# pinetree_img = pygame.image.load('img/oomoto_img/object/pinetree.png')
 
 # マス画像
-blue_img = pygame.image.load('img/oomoto_img/blue.png')
-red_img = pygame.image.load('img/oomoto_img/red.png')
-green_img = pygame.image.load('img/oomoto_img/green.png')
-purple_img = pygame.image.load('img/oomoto_img/purple.png')
+# blue_img = pygame.image.load('img/oomoto_img/blue.png')
+# red_img = pygame.image.load('img/oomoto_img/red.png')
+# green_img = pygame.image.load('img/oomoto_img/green.png')
+# purple_img = pygame.image.load('img/oomoto_img/purple.png')
 
 
 class ScreenMain(Screen_abc):
+    def __init__(self):
+        super(ScreenMain, self).__init__()
+        self.id = 2
+        self.map = Map()
+        self.condtion = 0
 
     # 画面生成
     def display(self):
         super().update()
 
         # 背景
-        SC.screen.blit(background_img, (0, 0))
+        #SC.screen.blit(background_img, (0, 0))
+        self.map.set_mappring_on_screen()
 
         # プレイヤー情報window
         SC.screen.blit(player1_window, (0, 0))
@@ -69,57 +78,57 @@ class ScreenMain(Screen_abc):
         # 現在のプレイヤーのカーソル
         super().setText_S('●', (32 * 1 - 3, 32 - 12), 20, SC.White)
 
-        # 青マス（コイン＋）
-        for i in range(12):
-            SC.screen.blit(blue_img, self.grid[8 + i * 2][5])
-            SC.screen.blit(blue_img, self.grid[8 + i * 2][13])
-            i += 1
-
-        # 赤マス（コイン－）
-        SC.screen.blit(red_img, self.grid[18][5])
-        SC.screen.blit(red_img, self.grid[22][5])
-        SC.screen.blit(red_img, self.grid[28][5])
-        for i in range(11):
-            if (i != 5 and i != 7 and i != 9):
-                SC.screen.blit(red_img, self.grid[8 + i * 2][13])
-            i += 1
-
-        # 紫色マス（特大－マス）
-        SC.screen.blit(purple_img, self.grid[12][5])
-        SC.screen.blit(purple_img, self.grid[26][13])
-
-        # 緑色マス（物件マス）
-        for i in range(5):
-            SC.screen.blit(green_img, self.grid[8][5 + i * 2])
-            SC.screen.blit(green_img, self.grid[30][5 + i * 2])
-            i += 1
-
-        # 物件
-        SC.screen.blit(ship_small_img, self.grid[28][4])
-        SC.screen.blit(ship_small_img, self.grid[31][5])
-        SC.screen.blit(tower_img, self.grid[29][6])
-        SC.screen.blit(tower_img, self.grid[29][10])
-        SC.screen.blit(ship_small_img, self.grid[31][13])
-        SC.screen.blit(ship_small_img, self.grid[28][14])
-
-        # フィールドのオブジェクト
-        SC.screen.blit(castle_img, (32 * 17 + 16, 32 * 7 + 8))
-        SC.screen.blit(budda_img, (32 * 9 + 4, 32 * 9 - 10))
-        SC.screen.blit(budda_img, (32 * 26, 32 * 6))
-        SC.screen.blit(shrine_img, (32 * 12 - 4, 32 * 6 + 10))
-        SC.screen.blit(shop_img, (32 * 21 + 10, 32 * 6))
-        SC.screen.blit(shop_img, (32 * 12 + 8, 32 * 10 + 10))
-        SC.screen.blit(ship_img, (32 * 33 + 16, 32 * 14 + 10))
-        SC.screen.blit(hotspring_img, (32 * 22 + 22, 32 * 10))
-        SC.screen.blit(hotspring_img, (32 * 25 + 22, 32 * 10))
-        SC.screen.blit(pinetree_img, (32 * 9 + 24, 32 * 6 + 20))
-        SC.screen.blit(pinetree_img, (32 * 12, 32 * 9 + 2))
-        SC.screen.blit(pinetree_img, (32 * 14, 32 * 9 + 2))
-        SC.screen.blit(pinetree_img, (32 * 16, 32 * 6 + 8))
-        SC.screen.blit(pinetree_img, (32 * 18, 32 * 6 + 8))
-        SC.screen.blit(pinetree_img, (32 * 17 - 12, 32 * 8 + 8))
-        SC.screen.blit(pinetree_img, (32 * 22, 32 * 8 + 16))
-        SC.screen.blit(pinetree_img, (32 * 24, 32 * 8 + 16))
+        # # 青マス（コイン＋）
+        # for i in range(12):
+        #     SC.screen.blit(blue_img, self.grid[8 + i * 2][5])
+        #     SC.screen.blit(blue_img, self.grid[8 + i * 2][13])
+        #     i += 1
+        #
+        # # 赤マス（コイン－）
+        # SC.screen.blit(red_img, self.grid[18][5])
+        # SC.screen.blit(red_img, self.grid[22][5])
+        # SC.screen.blit(red_img, self.grid[28][5])
+        # for i in range(11):
+        #     if (i != 5 and i != 7 and i != 9):
+        #         SC.screen.blit(red_img, self.grid[8 + i * 2][13])
+        #     i += 1
+        #
+        # # 紫色マス（特大－マス）
+        # SC.screen.blit(purple_img, self.grid[12][5])
+        # SC.screen.blit(purple_img, self.grid[26][13])
+        #
+        # # 緑色マス（物件マス）
+        # for i in range(5):
+        #     SC.screen.blit(green_img, self.grid[8][5 + i * 2])
+        #     SC.screen.blit(green_img, self.grid[30][5 + i * 2])
+        #     i += 1
+        #
+        # # 物件
+        # SC.screen.blit(ship_small_img, self.grid[28][4])
+        # SC.screen.blit(ship_small_img, self.grid[31][5])
+        # SC.screen.blit(tower_img, self.grid[29][6])
+        # SC.screen.blit(tower_img, self.grid[29][10])
+        # SC.screen.blit(ship_small_img, self.grid[31][13])
+        # SC.screen.blit(ship_small_img, self.grid[28][14])
+        #
+        # # フィールドのオブジェクト
+        # SC.screen.blit(castle_img, (32 * 17 + 16, 32 * 7 + 8))
+        # SC.screen.blit(budda_img, (32 * 9 + 4, 32 * 9 - 10))
+        # SC.screen.blit(budda_img, (32 * 26, 32 * 6))
+        # SC.screen.blit(shrine_img, (32 * 12 - 4, 32 * 6 + 10))
+        # SC.screen.blit(shop_img, (32 * 21 + 10, 32 * 6))
+        # SC.screen.blit(shop_img, (32 * 12 + 8, 32 * 10 + 10))
+        # SC.screen.blit(ship_img, (32 * 33 + 16, 32 * 14 + 10))
+        # SC.screen.blit(hotspring_img, (32 * 22 + 22, 32 * 10))
+        # SC.screen.blit(hotspring_img, (32 * 25 + 22, 32 * 10))
+        # SC.screen.blit(pinetree_img, (32 * 9 + 24, 32 * 6 + 20))
+        # SC.screen.blit(pinetree_img, (32 * 12, 32 * 9 + 2))
+        # SC.screen.blit(pinetree_img, (32 * 14, 32 * 9 + 2))
+        # SC.screen.blit(pinetree_img, (32 * 16, 32 * 6 + 8))
+        # SC.screen.blit(pinetree_img, (32 * 18, 32 * 6 + 8))
+        # SC.screen.blit(pinetree_img, (32 * 17 - 12, 32 * 8 + 8))
+        # SC.screen.blit(pinetree_img, (32 * 22, 32 * 8 + 16))
+        # SC.screen.blit(pinetree_img, (32 * 24, 32 * 8 + 16))
 
         # サイコロ
         SC.screen.blit(dice1, self.grid[35][5])
@@ -163,4 +172,4 @@ class ScreenMain(Screen_abc):
                     pygame.quit()
                     sys.exit()
                 if event.key == K_SPACE:
-                    SC.effect_group.add(SC.ScreenChangeEffect(4))
+                    effect.add_effect(effect.ScreenChangeEffect(4))

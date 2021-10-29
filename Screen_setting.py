@@ -2,6 +2,7 @@ import pygame
 from pygame.locals import *
 
 import Screen_abc as SC
+import effect
 from Screen_abc import Screen_abc
 import sys
 
@@ -110,7 +111,7 @@ class ScreenSetting(Screen_abc):
                             Config(1, c.get(CPU), c.get(TURN))
                         else:
                             Config(c.get(PLAYER), c.get(CPU), c.get(TURN))
-                        SC.effect_group.add(SC.ScreenChangeEffect(2))
+                        effect.add_effect(effect.ScreenChangeEffect(2))
                         now_select = 0
                         return
 
