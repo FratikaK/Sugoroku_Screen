@@ -1,4 +1,5 @@
 import pygame
+import Screen_abc as SC
 
 group = pygame.sprite.Group()
 
@@ -82,14 +83,13 @@ class ScreenChangeEffect(pygame.sprite.Sprite):
             self.rect.y = 0
 
     def update(self):
-        global ScreenNum
         # MOSAIC形式処理
         if self.screen_format == ScreenChangeEffect.MOSAIC:
             if not self.is_changed:
                 if self.index > self.limit:
                     self.is_changed = True
                     self.index = self.limit
-                    ScreenNum = self.next_screen_id
+                    SC.ScreenNum = self.next_screen_id
                     return
                 self.image = self.images[self.index]
                 self.index += 1
@@ -116,8 +116,8 @@ class ScreenChangeEffect(pygame.sprite.Sprite):
                     self.rect.x = 0
 
             elif self.rect.x <= 0:
-                if ScreenNum != self.next_screen_id:
-                    ScreenNum = self.next_screen_id
+                if SC.ScreenNum != self.next_screen_id:
+                    SC.ScreenNum = self.next_screen_id
                 if self.wait_time > 0:
                     if self.rect.x <= 0:
                         self.rect.x = 0

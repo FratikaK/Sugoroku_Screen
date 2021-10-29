@@ -84,7 +84,7 @@ class ScreenStart(Screen_abc):
                         Screen_setting.SOLO = False
                     elif selectY == 1:
                         Screen_setting.SOLO = True
-                    SC.effect_group.add(SC.ScreenChangeEffect(1, SC.ScreenChangeEffect.MOSAIC))
+                    effect.add_effect(effect.ScreenChangeEffect(1, effect.ScreenChangeEffect.MOSAIC))
                 if event.key == K_UP:  # 「↑」が押されたとき
                     if selectY > 0:
                         y(-1)

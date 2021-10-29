@@ -2,6 +2,7 @@ import pygame
 from pygame.locals import *
 
 import Screen_abc as SC
+import effect
 from Screen_abc import Screen_abc
 import sys
 
@@ -47,7 +48,7 @@ class ScreenLoading(Screen_abc):
             super().update(10)
             return
         else:
-            SC.effect_group.add(SC.ScreenChangeEffect(3))
+            effect.add_effect(effect.ScreenChangeEffect(3))
             self.__initialize()
             super().update(30)
 

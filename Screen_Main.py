@@ -2,6 +2,7 @@ import pygame
 from pygame.locals import *
 
 import Screen_abc as SC
+import effect
 from Screen_abc import Screen_abc
 import sys
 
@@ -163,4 +164,4 @@ class ScreenMain(Screen_abc):
                     pygame.quit()
                     sys.exit()
                 if event.key == K_SPACE:
-                    SC.effect_group.add(SC.ScreenChangeEffect(4))
+                    effect.add_effect(effect.ScreenChangeEffect(4))
