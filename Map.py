@@ -2,6 +2,8 @@ import pygame
 import Screen_abc as SC
 
 # RPG版の背景画像
+from Sugoroku_Screen.MassEnum import MassEnum
+
 rpg_opening = pygame.image.load("img/mapimg/background/RPG＿序盤.png")
 rpg_opening_object = pygame.image.load("img/mapimg/background/RPG_序盤(物件あり).png")
 rpg_middle = pygame.image.load("img/mapimg/background/RPG_中盤.png")
@@ -43,7 +45,7 @@ class Map:
                          (384, 416), (320, 416), (256, 416),
                          # 下ライン
                          (256, 352), (256, 288), (256, 224)]  # ソースコードの整理　CTRL＋ALT＋L ボタンを押す
-        self.map_Mass_enum = [1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 1, 2, 2, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+        self.map_Mass_enum = [MassEnum.AddCoin.value,MassEnum.AddCoin.value, MassEnum.AddCoin.value, MassEnum.AddCoin.value, MassEnum.AddCoin.value, MassEnum.AddCoin.value, MassEnum.AddCoin.value, MassEnum.AddCoin.value, MassEnum.AddCoin.value, MassEnum.Building.value, MassEnum.Building.value, MassEnum.Building.value, MassEnum.AddCoin.value, MassEnum.Building.value, MassEnum.Building.value, MassEnum.Building.value, MassEnum.AddCoin.value, MassEnum.AddCoin.value, MassEnum.AddCoin.value, MassEnum.AddCoin.value, MassEnum.AddCoin.value, MassEnum.AddCoin.value, MassEnum.AddCoin.value, MassEnum.AddCoin.value, MassEnum.AddCoin.value, MassEnum.AddCoin.value, MassEnum.AddCoin.value, MassEnum.AddCoin.value, MassEnum.AddCoin.value]
         self.mass_img = [mass_blue, mass_red, mass_yellow, mass_reinbo, mass_purple]
         self.building = []
 
