@@ -1,0 +1,66 @@
+{
+  "RPG": {
+    "mapImg": [
+      [
+        "img/mapimg/RPG_序盤.png",
+        "img/mapimg/RPG_序盤(物件あり).png"
+      ],
+      [
+        "img/mapimg/RPG_中盤.png",
+        "img/mapimg/RPG_中盤(物件あり).png"
+      ],
+      [
+        "img/mapimg/RPG_終盤.png",
+        "img/mapimg/RPG_終盤(物件あり).png"
+      ]
+    ],
+    "mapMassEnum": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      2,
+      2,
+      2,
+      0,
+      2,
+      2,
+      2,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+    ],
+    "massimg": [
+      "img/mapimg/mass/blue.png",
+      "img/mapimg/mass/red.png",
+      "img/mapimg/mass/yellow.png",
+      "img/mapimg/mass/reinbo-.png",
+      "img/mapimg/mass/purple.png"
+    ],
+    "builName": {
+    },
+    "buildingimg": {
+    },
+    "buildingPosi_img": {
+    },
+    "buildingPosi_mass": {
+    },
+    "buildingRate": {
+    }
+  }
+}

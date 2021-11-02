@@ -1,5 +1,6 @@
 import pygame
 import Screen_abc as SC
+import json
 
 # RPG版の背景画像
 from Sugoroku_Screen.MassEnum import MassEnum
@@ -32,37 +33,54 @@ rpg_hause = pygame.image.load("img/mapimg/object/hausu.png")
 
 
 class Map:
-    def __init__(self):
+    def __init__(self):     #コンストラクタ
+
+        # 背景の画像を配列に入れている(序盤,中盤,終盤)
         self.map_img = [[rpg_opening, rpg_opening_object, island_opening, island_opening_object],
                         [rpg_middle, rpg_middle_object, island_middle, island_middle_object],
                         [rpg_final, rpg_final_object, island_final, island_final_object]
                         ]
+        # マスの座標を配列に入れている。
         self.map_Posi = [(256, 160), (320, 160), (384, 160), (448, 160), (512, 160), (576, 160), (640, 160), (704, 160),
                          (768, 160), (832, 160), (896, 160), (960, 160),
-                         # 上ライン
-                         (960, 224), (960, 288), (960, 352), (960, 416),  # 右ライン
+                         (960, 224), (960, 288), (960, 352), (960, 416),
                          (896, 416), (832, 416), (768, 416), (704, 416), (640, 416), (576, 416), (512, 416), (448, 416),
-                         (384, 416), (320, 416), (256, 416),
-                         # 下ライン
-                         (256, 352), (256, 288), (256, 224)]  # ソースコードの整理　CTRL＋ALT＋L ボタンを押す
-        self.map_Mass_enum = [MassEnum.AddCoin.value,MassEnum.AddCoin.value, MassEnum.AddCoin.value, MassEnum.AddCoin.value, MassEnum.AddCoin.value, MassEnum.AddCoin.value, MassEnum.AddCoin.value, MassEnum.AddCoin.value, MassEnum.AddCoin.value, MassEnum.Building.value, MassEnum.Building.value, MassEnum.Building.value, MassEnum.AddCoin.value, MassEnum.Building.value, MassEnum.Building.value, MassEnum.Building.value, MassEnum.AddCoin.value, MassEnum.AddCoin.value, MassEnum.AddCoin.value, MassEnum.AddCoin.value, MassEnum.AddCoin.value, MassEnum.AddCoin.value, MassEnum.AddCoin.value, MassEnum.AddCoin.value, MassEnum.AddCoin.value, MassEnum.AddCoin.value, MassEnum.AddCoin.value, MassEnum.AddCoin.value, MassEnum.AddCoin.value]
+                         (384, 416), (320, 416),
+                         (256, 416), (256, 352), (256, 288), (256, 224)]  # ソースコードの整理　CTRL＋ALT＋L ボタンを押す
+
+        # それぞれ割り振られたマスの色、画像をEnumで指定している。
+        self.map_Mass_enum = [MassEnum.AddCoin.value, MassEnum.AddCoin.value, MassEnum.AddCoin.value,
+                              MassEnum.AddCoin.value, MassEnum.AddCoin.value, MassEnum.AddCoin.value,
+                              MassEnum.AddCoin.value, MassEnum.AddCoin.value, MassEnum.AddCoin.value,
+                              MassEnum.Building.value, MassEnum.Building.value, MassEnum.Building.value,
+                              MassEnum.AddCoin.value, MassEnum.Building.value, MassEnum.Building.value,
+                              MassEnum.Building.value, MassEnum.AddCoin.value, MassEnum.AddCoin.value,
+                              MassEnum.AddCoin.value, MassEnum.AddCoin.value, MassEnum.AddCoin.value,
+                              MassEnum.AddCoin.value, MassEnum.AddCoin.value, MassEnum.AddCoin.value,
+                              MassEnum.AddCoin.value, MassEnum.AddCoin.value, MassEnum.AddCoin.value,
+                              MassEnum.AddCoin.value, MassEnum.AddCoin.value]
+
+        # マスの色の画像を配列に入れている。
         self.mass_img = [mass_blue, mass_red, mass_yellow, mass_reinbo, mass_purple]
+        # 物件の画像を格納する。
         self.building = []
+        self.building_mass_posi = [(896, 128), (960, 128), (992, 224), (992, 352), (992, 416), (896, 448)]  # 物件のマス座標
 
     def init(self):
         pass
 
     def set_mappring_on_screen(self):
         count = 0
-        SC.screen.blit(rpg_opening, (0, 0))  # 仮
-        building_mass_posi = [(896, 128), (960, 128), (992, 224), (992, 352), (992, 416), (896, 448)]
+        SC.screen.blit(rpg_opening, (0, 0))  # 仮背景画像の指定
+        #uilding_mass_posi = [(896, 128), (960, 128), (992, 224), (992, 352), (992, 416), (896, 448)] #物件のマス座標
         for i in self.map_Posi:
-            SC.screen.blit(self.mass_img[self.map_Mass_enum[count-1]], i)
+            SC.screen.blit(self.mass_img[self.map_Mass_enum[count - 1]], i)  #それぞれのマス画像を出力
             count += 1
             if (count >= 30):
                 break
-        for i in building_mass_posi:
-            SC.screen.blit(rpg_hause, i)
+        for i in self.building_mass_posi:
+            SC.screen.blit(rpg_hause, i)  #物件の画像を物件マスの横に表示している
 
-    def getBuildingfo(self):
+    def getBuildingfo(self,posi):
+        building_mass_posi = [(896, 128), (960, 128), (992, 224), (992, 352), (992, 416), (896, 448)]  # 物件のマス座標
         pass
